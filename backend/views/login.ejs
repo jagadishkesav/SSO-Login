@@ -7,8 +7,11 @@
   </head>
   <body>
     <h1>Google Login</h1>
-    <a className="App-link" href="http://localhost:5000/auth/google">
+    <!-- <a className="App-link" href="http://localhost:5000/auth/google">
       Login with Google
-    </a>
+    </a> -->
+    <a href="/auth/google?redirectURL=<%= encodeURIComponent(redirectURL) %>"
+      >Login with Google</a
+    >
   </body>
 </html>

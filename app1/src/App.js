@@ -1,42 +1,38 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
 
+const AUTH_URL = "http://sso.navadhiti.hub.com:5000/auth";
+const LOGIN_URL = "http://sso.navadhiti.hub.com:5000/login";
+const LOGOUT_URL = "http://sso.navadhiti.hub.com:5000/logout";
+
+const fetchAuthStatus = async (url) => {
+  const res = await fetch(url);
+  const data = await res.json();
+  return data.isAuthenticated;
+};
+
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
+
   useEffect(() => {
-    fetch("http://localhost:5000/auth", {
-      credentials: "include", // This includes cookies in the request
-    })
-      .then((res) => res.json())
-      .then((data) => setIsAuthenticated(data.isAuthenticated));
+    fetchAuthStatus(AUTH_URL).then(setIsAuthenticated);
   }, []);
 
   useEffect(() => {
-    if (!isAuthenticated) window.location.href = "http://localhost:5000/login";
+    if (!isAuthenticated)
+      window.location.href = LOGIN_URL + "?redirectURL=" + window.location.href;
   }, [isAuthenticated]);
-  const handleLogout = () => {
-    fetch("http://localhost:5000/logout", {
-      credentials: "include", // This includes cookies in the request
-    })
-      .then((res) => res.json())
-      .then((data) => setIsAuthenticated(data.isAuthenticated));
+
+  const handleLogout = async () => {
+    const isAuthenticated = await fetchAuthStatus(LOGOUT_URL);
+    setIsAuthenticated(isAuthenticated);
   };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="http://localhost:5000/auth/google"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <button onClick={handleLogout}>log out</button>
+        <p>App 1</p>
+        <button onClick={handleLogout}>Logout</button>
       </header>
     </div>
   );

@@ -1,6 +1,6 @@
-# 🚀 ND-SSO-Service
+# 🚀 SSO-Service
 
-ND-SSO-Service is a service that provides Single Sign-On (SSO) functionality using Google OAuth2.
+SSO-Service is a service that provides Single Sign-On (SSO) functionality using Google OAuth2.
 
 ## 🔐 How SSO Works
 
@@ -55,14 +55,14 @@ For additional information, please refer to the following code flow as a pictori
 1. Clone the repository: 
 
 ```bash
-git clone https://github.com/navadhiti/nd-sso-service.git
-cd nd-sso-service
+git clone https://github.com/jagadishkesav/SSO-Login.git
+cd SSO-Login
 ```
 
 2. Install the dependencies: 
 
 ```bash
-npm ci
+npm i
 ```
 
 3. Set the environment variables:
